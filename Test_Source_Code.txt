@@ -1,0 +1,19 @@
+^^$add mod1
+^^$add mod2
+
+^^ this is a comment
+
+var varname = 8;    ^^ this is a comment
+num varname2 = 1 + varname; 
+num varname2 = varname + 1 ; 
+str a_string = "some text -1";
+
+if (2 == 22) {print("No");}
+elif (2 >= 22) {print
+("STILL NO");
+}
+else {print("Finally!");}
+
+^^for (num i = 10; i <= 4; i = i-1) {
+^^	print(2);
+^^}

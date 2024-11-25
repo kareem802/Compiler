@@ -1,0 +1,24 @@
+&add mod1
+&add mod2
+
+^^ the "^^" preceds a comment 
+
+var "varname" = "value";            ^^ identifers construction ^[a-zA-Z_][a-zA-Z0-9_]*$
+int "varname" = "numeric value";	^^ types = {bool,num,str}
+									^^ bool = (true|flase) 
+									^^ num = [0-9]+ ([\-+/*] [0-9]+)*
+str "string var" = "value"			^^ str = [a-zA-Z0-9\-+/*=]
+
+func "function name" {
+  "function body"
+}
+
+if ("condition") {"action"}
+elif ("condition") {"action"}
+else {"action"}
+
+for ("variable initiation", "condition", "action on each cycle") {
+	"action(s)"
+}
+
+"keyword/identifier"("exprission")
