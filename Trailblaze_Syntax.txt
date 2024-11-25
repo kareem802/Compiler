@@ -1,7 +1,8 @@
-&add mod1
+^^ the "^^" preceds a comment 
+
+&add mod1            ^^ &add 'module name'
 &add mod2
 
-^^ the "^^" preceds a comment 
 
 var "varname" = "value";            ^^ identifers construction ^[a-zA-Z_][a-zA-Z0-9_]*$
 int "varname" = "numeric value";	^^ types = {bool,num,str}

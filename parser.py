@@ -82,11 +82,23 @@ class Parser:
         return {'type': 'VariableDeclaration', 'var_type': var_type, 'identifier': identifier, 'expression': expression}
 
     # FunctionDefinition -> "func" Identifier "{" FunctionBody "}"
+    def parameters(self):
+        parameters = []
+        if self.current_token()[0] != 'RPAREN':  # Check if there are any parameters
+            parameters.append(self.match('IDENTIFIER'))  # First parameter
+            while self.current_token()[0] == 'COMMA':  # Handle additional parameters
+                self.match('COMMA')
+                parameters.append(self.match('IDENTIFIER'))
+        return parameters
+
     def function_definition(self):
         self.match('FUNC')
         identifier = self.match('IDENTIFIER')
+        self.match('LPAREN')
+        body = self.parameters()
+        self.match('RPAREN')
         self.match('LBRACE')
-        body = self.statement_list()
+        self.statement_list()
         self.match('RBRACE')
         return {'type': 'FunctionDefinition', 'identifier': identifier, 'body': body}
 
@@ -131,7 +143,6 @@ class Parser:
         self.match('FOR')
         self.match('LPAREN')
         var_decl = self.variable_declaration()
-        self.match('SEMICOLON')
         condition = self.condition()
         self.match('SEMICOLON')
         loop_action = self.loop_action()
@@ -148,13 +159,23 @@ class Parser:
         expression = self.expression()
         return {'type': 'LoopAction', 'identifier': identifier, 'expression': expression}
 
+    def arguments(self):
+        arguments = []
+        if self.current_token()[0] != 'RPAREN':  # Check if there are arguments
+            arguments.append(self.expression())  # First argument
+            while self.current_token()[0] == 'COMMA':  # Handle additional arguments
+                self.match('COMMA')
+                arguments.append(self.expression())
+        return arguments
+
     # FunctionCall -> (Identifier | Keyword) "(" Expression ")"
     def function_call(self):
         identifier = self.match('IDENTIFIER')
         self.match('LPAREN')
-        expression = self.expression()
+        arguments = self.arguments()
         self.match('RPAREN')
-        return {'type': 'FunctionCall', 'identifier': identifier, 'expression': expression}
+        self.match('SEMICOLON')
+        return {'type': 'FunctionCall', 'identifier': identifier, 'arguments': arguments}
 
    # Expression -> BoolExpr | NumExpr | StrExpr | Identifier
     def expression(self):

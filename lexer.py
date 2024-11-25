@@ -10,7 +10,7 @@ TOKEN_PATTERNS = {
     "ELSE": r"\belse\b",
     "FUNC": r"\bfunc\b",
     "PRINT": r"\bprint\b",
-
+    "FOR": r"\bfor\b",
     # Identifiers
     "IDENTIFIER": r"\b[a-zA-Z_][a-zA-Z0-9_]*\b",
 
@@ -33,6 +33,7 @@ TOKEN_PATTERNS = {
     "LBRACE": r"\{",
     "RBRACE": r"\}",
     "SEMICOLON": r";",
+    "COMMA": r",",
 
     # Whitespace (ignored by the lexer)
     "WHITESPACE": r"\s+",
@@ -40,25 +41,6 @@ TOKEN_PATTERNS = {
     # Comments
     "COMMENT": r"\^\^.*"
 }
-
-
-
-# using named capturing groups. we combine every pattern with its token name in a single regex
-
-# REGEX_TOKENS = "|".join(f"(?P<{token}>{pattern})" for token, pattern in TOKEN_PATTERNS.items())
-
-
-# def tokenize(code):
-#     tokens = []
-
-#     for match in re.finditer(REGEX_TOKENS, code):
-#         token_type = match.lastgroup
-#         token_value = match.group(token_type)
-
-#         if token_type != "WHITESPACE" and token_type != "COMMENT":
-#             tokens.append((token_type, token_value))
-    
-#     return tokens
 
 def tokenize(source_code):
     tokens = []
